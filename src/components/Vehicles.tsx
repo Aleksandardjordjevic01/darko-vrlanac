@@ -1,3 +1,6 @@
+'use client';
+
+import Image from "next/image";
 import vehicleEclass from "@/assets/vehicle-eclass.jpg";
 import vehicleSprinter from "@/assets/vehicle-sprinter.jpg";
 import { useScrollFade } from "@/hooks/useScrollFade";
@@ -36,14 +39,14 @@ const Vehicles = () => {
               key={v.name}
               className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
             >
-              <div className="relative overflow-hidden">
-                <img
+              <div className="relative overflow-hidden h-64">
+                <Image
                   src={v.image}
                   alt={v.name}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <span className="absolute top-4 right-4 px-3 py-1 text-xs font-medium tracking-wider uppercase bg-primary text-primary-foreground rounded-full">
+                <span className="absolute top-4 right-4 px-3 py-1 text-xs font-medium tracking-wider uppercase bg-primary text-primary-foreground rounded-full z-10">
                   {v.badge}
                 </span>
               </div>

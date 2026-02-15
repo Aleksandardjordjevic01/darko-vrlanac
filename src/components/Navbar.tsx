@@ -1,6 +1,10 @@
+'use client';
+
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LanguageSelect } from "@/components/LanguageSelect";
 
 const navItems = [
   { label: "Početna", href: "/" },
@@ -12,10 +16,21 @@ const navItems = [
   { label: "Kontakt", href: "/kontakt" },
 ];
 
+const languages = [
+  { label: "Srpski", value: "sr" },
+  { label: "English", value: "en" },
+  { label: "Deutsch", value: "de" },
+  { label: "Français", value: "fr" },
+  { label: "Italiano", value: "it" },
+  { label: "Русский", value: "ru" },
+  { label: "中文", value: "zh" },
+];
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+  const [language, setLanguage] = useState("sr");
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -24,7 +39,7 @@ const Navbar = () => {
   }, []);
 
   // On subpages, always use scrolled (light) style
-  const isHome = location.pathname === "/";
+  const isHome = pathname === "/";
   const isLight = scrolled || !isHome;
 
   return (
@@ -36,7 +51,7 @@ const Navbar = () => {
       }`}
     >
       <div className="flex items-center justify-between px-6 py-4">
-        <Link to="/" className="font-serif text-xl font-bold tracking-wide">
+        <Link href="/" className="font-serif text-xl font-bold tracking-wide">
           <span className={isLight ? "text-foreground" : "text-primary-foreground"}>
             Vječno
           </span>
@@ -46,26 +61,23 @@ const Navbar = () => {
           {navItems.map((item) => (
             <Link
               key={item.label}
-              to={item.href}
+              href={item.href}
               className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:opacity-70 ${
                 isLight ? "text-foreground" : "text-primary-foreground"
-              } ${location.pathname === item.href ? "opacity-60" : ""}`}
+              } ${pathname === item.href ? "opacity-60" : ""}`}
             >
               {item.label}
             </Link>
           ))}
         </div>
 
-        <Link
-          to="/kontakt"
-          className={`hidden md:inline-flex px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${
-            isLight
-              ? "bg-primary text-primary-foreground hover:bg-gray-800"
-              : "bg-primary-foreground text-primary hover:bg-gray-100"
-          }`}
-        >
-          Zakažite Poziv
-        </Link>
+        <LanguageSelect 
+          value={language} 
+          onValueChange={setLanguage}
+          languages={languages}
+          isLight={isLight}
+          className="hidden md:flex"
+        />
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -80,7 +92,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <Link
               key={item.label}
-              to={item.href}
+              href={item.href}
               onClick={() => setMobileOpen(false)}
               className={`text-sm font-medium ${
                 isLight ? "text-foreground" : "text-primary-foreground"
@@ -89,17 +101,13 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/kontakt"
-            onClick={() => setMobileOpen(false)}
-            className={`inline-flex justify-center px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${
-              isLight
-                ? "bg-primary text-primary-foreground"
-                : "bg-primary-foreground text-primary"
-            }`}
-          >
-            Zakažite Poziv
-          </Link>
+          
+          <LanguageSelect 
+            value={language} 
+            onValueChange={setLanguage}
+            languages={languages}
+            isLight={isLight}
+          />
         </div>
       )}
     </nav>

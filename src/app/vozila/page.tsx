@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import Vehicles from "@/components/Vehicles";
 
-const VozilaPage = () => {
+export default function VozilaPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -12,6 +12,4 @@ const VozilaPage = () => {
       <Footer />
     </div>
   );
-};
-
-export default VozilaPage;
+}

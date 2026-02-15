@@ -2,25 +2,22 @@ import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import Stats from "@/components/Stats";
-import { useScrollFade } from "@/hooks/useScrollFade";
 import { Shield, Heart, Clock, Award } from "lucide-react";
 
 const values = [
   { icon: Shield, title: "Pouzdanost", description: "Više od 25 godina smo sinonim za pouzdanu i profesionalnu organizaciju sahrana." },
-  { icon: Heart, title: "Empatija", description: "Pristupamo svakoj porodici sa razumevanjem, poštovanjem i brigom u najtežim trenucima." },
+  { icon: Heart, title: "Empatija", description: "Pristupamo svakoj porodicicom sa razumevanjem, poštovanjem i brigom u najtežim trenucima." },
   { icon: Clock, title: "Dostupnost", description: "Naš tim je dostupan 24 sata dnevno, 7 dana u nedelji, 365 dana u godini." },
   { icon: Award, title: "Profesionalnost", description: "Svaki detalj organizujemo sa najvišim standardima kvaliteta i pažnje." },
 ];
 
-const ONama = () => {
-  const ref = useScrollFade();
-
+export default function ONamaPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader title="O Nama" subtitle="Više od 25 godina posvećeni dostojanstvenoj organizaciji sahrana" />
 
-      <section className="py-24 md:py-32 bg-background" ref={ref}>
+      <section className="py-24 md:py-32 bg-background">
         <div className="container max-w-4xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-serif font-semibold text-center mb-8">
             Ko Smo Mi
@@ -60,6 +57,4 @@ const ONama = () => {
       <Footer />
     </div>
   );
-};
-
-export default ONama;
+}

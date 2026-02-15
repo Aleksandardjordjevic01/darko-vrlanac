@@ -1,7 +1,8 @@
+'use client';
+
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
-import { useScrollFade } from "@/hooks/useScrollFade";
 import { useState } from "react";
 import { Package, Flower2, Star, Shield } from "lucide-react";
 
@@ -45,8 +46,7 @@ const equipment = [
 
 type Tab = "paketi" | "sanduci" | "oprema";
 
-const Katalog = () => {
-  const ref = useScrollFade();
+export default function KatalogPage() {
   const [activeTab, setActiveTab] = useState<Tab>("paketi");
 
   const tabs: { id: Tab; label: string }[] = [
@@ -60,7 +60,7 @@ const Katalog = () => {
       <Navbar />
       <PageHeader title="Katalog" subtitle="Kompletna ponuda pogrebne opreme, paketa i usluga" />
 
-      <section className="py-24 md:py-32 bg-background" ref={ref}>
+      <section className="py-24 md:py-32 bg-background">
         <div className="container max-w-6xl mx-auto px-6">
           {/* Tabs */}
           <div className="flex justify-center gap-3 mb-16 flex-wrap">
@@ -169,6 +169,4 @@ const Katalog = () => {
       <Footer />
     </div>
   );
-};
-
-export default Katalog;
+}

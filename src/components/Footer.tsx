@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const footerNav = [
   { label: "Početna", href: "/" },
@@ -29,7 +29,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               {footerNav.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.href} className="hover:text-primary-foreground transition-colors">
+                  <Link href={l.href} className="hover:text-primary-foreground transition-colors">
                     {l.label}
                   </Link>
                 </li>

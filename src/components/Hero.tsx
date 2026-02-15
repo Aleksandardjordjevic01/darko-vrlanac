@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -9,11 +10,13 @@ const Hero = () => {
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={heroBg}
           alt="Funeral home"
-          className="w-full h-full object-cover"
-          loading="eager"
+          fill
+          className="object-cover"
+          priority
+          quality={90}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/50 to-primary/80" />
       </div>
@@ -28,13 +31,13 @@ const Hero = () => {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-in fade-in-delay-2">
           <Link
-            to="/kontakt"
+            href="/kontakt"
             className="px-8 py-4 bg-primary-foreground text-primary font-medium text-sm tracking-wide rounded-lg hover:bg-gray-100 transition-all duration-300"
           >
             Kontaktirajte Nas
           </Link>
           <Link
-            to="/usluge"
+            href="/usluge"
             className="px-8 py-4 border border-primary-foreground text-primary-foreground font-medium text-sm tracking-wide rounded-lg hover:bg-primary-foreground hover:text-primary transition-all duration-300"
           >
             Naše Usluge

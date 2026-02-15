@@ -1,26 +1,24 @@
+'use client';
+
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
-import { useScrollFade } from "@/hooks/useScrollFade";
 import { useState } from "react";
 import { X } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
-import vehicleEclass from "@/assets/vehicle-eclass.jpg";
-import vehicleSprinter from "@/assets/vehicle-sprinter.jpg";
 
+// Note: You'll need to import actual images
 const galleryImages = [
-  { src: heroBg, alt: "Pogrebna ceremonija", category: "Ceremonije" },
-  { src: vehicleEclass, alt: "Mercedes-Benz E-Class", category: "Vozila" },
-  { src: vehicleSprinter, alt: "Mercedes-Benz Sprinter", category: "Vozila" },
-  { src: heroBg, alt: "Unutrašnjost kapele", category: "Prostor" },
-  { src: vehicleEclass, alt: "Pogrebna pratnja", category: "Ceremonije" },
-  { src: vehicleSprinter, alt: "Međunarodni transport", category: "Vozila" },
+  { src: "/images/hero-bg.jpg", alt: "Pogrebna ceremonija", category: "Ceremonije" },
+  { src: "/images/vehicle-eclass.jpg", alt: "Mercedes-Benz E-Class", category: "Vozila" },
+  { src: "/images/vehicle-sprinter.jpg", alt: "Mercedes-Benz Sprinter", category: "Vozila" },
+  { src: "/images/hero-bg.jpg", alt: "Unutrašnjost kapele", category: "Prostor" },
+  { src: "/images/vehicle-eclass.jpg", alt: "Pogrebna pratnja", category: "Ceremonije" },
+  { src: "/images/vehicle-sprinter.jpg", alt: "Međunarodni transport", category: "Vozila" },
 ];
 
 const categories = ["Sve", "Ceremonije", "Vozila", "Prostor"];
 
-const Galerija = () => {
-  const ref = useScrollFade();
+export default function GalerijaPage() {
   const [activeCategory, setActiveCategory] = useState("Sve");
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -33,7 +31,7 @@ const Galerija = () => {
       <Navbar />
       <PageHeader title="Galerija" subtitle="Pogledajte naš prostor, vozila i dosadašnji rad" />
 
-      <section className="py-24 md:py-32 bg-background" ref={ref}>
+      <section className="py-24 md:py-32 bg-background">
         <div className="container max-w-6xl mx-auto px-6">
           {/* Filters */}
           <div className="flex justify-center gap-3 mb-16 flex-wrap">
@@ -98,6 +96,4 @@ const Galerija = () => {
       <Footer />
     </div>
   );
-};
-
-export default Galerija;
+}

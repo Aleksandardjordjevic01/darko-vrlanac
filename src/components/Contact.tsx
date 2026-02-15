@@ -1,3 +1,5 @@
+'use client';
+
 import { Phone, MapPin, Mail } from "lucide-react";
 import { useScrollFade } from "@/hooks/useScrollFade";
 import { useState } from "react";

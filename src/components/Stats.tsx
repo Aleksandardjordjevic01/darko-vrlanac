@@ -1,3 +1,5 @@
+'use client';
+
 import { useScrollFade } from "@/hooks/useScrollFade";
 
 const stats = [

@@ -1,3 +1,5 @@
+'use client';
+
 import { Phone, FileText, Users } from "lucide-react";
 import { useScrollFade } from "@/hooks/useScrollFade";
 
