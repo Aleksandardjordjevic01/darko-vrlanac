@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -26,18 +27,18 @@ const Hero = () => {
           Uz vas u najtežim trenucima — kompletna podrška 24/7
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-in fade-in-delay-2">
-          <a
-            href="#contact"
+          <Link
+            to="/kontakt"
             className="px-8 py-4 bg-primary-foreground text-primary font-medium text-sm tracking-wide rounded-lg hover:bg-gray-100 transition-all duration-300"
           >
             Kontaktirajte Nas
-          </a>
-          <a
-            href="#services"
+          </Link>
+          <Link
+            to="/usluge"
             className="px-8 py-4 border border-primary-foreground text-primary-foreground font-medium text-sm tracking-wide rounded-lg hover:bg-primary-foreground hover:text-primary transition-all duration-300"
           >
             Naše Usluge
-          </a>
+          </Link>
         </div>
       </div>
 
