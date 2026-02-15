@@ -1,3 +1,4 @@
+import Image from "next/image";
 import heroBg from "@/assets/hero-bg.jpg";
 
 interface PageHeaderProps {
@@ -9,11 +10,12 @@ const PageHeader = ({ title, subtitle }: PageHeaderProps) => {
   return (
     <section className="relative h-[50vh] min-h-[360px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <img
+        <Image
           src={heroBg}
           alt=""
-          className="w-full h-full object-cover"
-          loading="eager"
+          fill
+          className="object-cover"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/60 to-primary/85" />
       </div>

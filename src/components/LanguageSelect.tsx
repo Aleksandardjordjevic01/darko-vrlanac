@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from "react";
-import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,47 +24,67 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
   className,
   isLight = true,
 }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const selectedLanguage = languages.find(lang => lang.value === value);
+
+  const handleSelect = (langValue: string) => {
+    onValueChange(langValue);
+    setIsOpen(false);
+  };
+
   return (
-    <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
-      <SelectPrimitive.Trigger
+    <div ref={dropdownRef} className={cn("relative", className)}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "flex items-center gap-2 px-3 py-2 rounded-md text-xs transition-colors outline-none border-0 bg-transparent",
-          isLight ? "text-foreground hover:opacity-70" : "text-primary-foreground hover:opacity-70",
-          className
+          isLight ? "text-foreground hover:opacity-70" : "text-primary-foreground hover:opacity-70"
         )}
       >
         <Globe className="w-4 h-4" />
-        <SelectPrimitive.Value />
-        <SelectPrimitive.Icon asChild>
-          <ChevronDown className="h-3 w-3 opacity-50" />
-        </SelectPrimitive.Icon>
-      </SelectPrimitive.Trigger>
+        <span>{selectedLanguage?.label}</span>
+        <ChevronDown className={cn("h-3 w-3 opacity-50 transition-transform", isOpen && "rotate-180")} />
+      </button>
 
-      <SelectPrimitive.Portal>
-        <SelectPrimitive.Content
-          className="relative z-[100] min-w-[140px] overflow-hidden rounded-lg border bg-popover shadow-lg"
-          position="popper"
-          sideOffset={4}
-          align="end"
-        >
-          <SelectPrimitive.Viewport className="p-1">
+      {isOpen && (
+        <div className="absolute right-0 top-full mt-1 w-max overflow-hidden rounded-lg border bg-popover shadow-lg z-[100]">
+          <div className="p-1">
             {languages.map((lang) => (
-              <SelectPrimitive.Item
+              <button
                 key={lang.value}
-                value={lang.value}
-                className="relative flex w-full cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                onClick={() => handleSelect(lang.value)}
+                className="relative flex w-full cursor-pointer select-none items-center rounded-md py-2 pl-7 pr-3 text-sm outline-none hover:bg-accent hover:text-accent-foreground text-left whitespace-nowrap"
               >
-                <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-                  <SelectPrimitive.ItemIndicator>
+                {lang.value === value && (
+                  <span className="absolute left-1.5 flex h-3.5 w-3.5 items-center justify-center">
                     <Check className="h-4 w-4" />
-                  </SelectPrimitive.ItemIndicator>
-                </span>
-                <SelectPrimitive.ItemText>{lang.label}</SelectPrimitive.ItemText>
-              </SelectPrimitive.Item>
+                  </span>
+                )}
+                <span>{lang.label}</span>
+              </button>
             ))}
-          </SelectPrimitive.Viewport>
-        </SelectPrimitive.Content>
-      </SelectPrimitive.Portal>
-    </SelectPrimitive.Root>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };

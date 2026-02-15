@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { LanguageSelect } from "@/components/LanguageSelect";
 
@@ -51,10 +52,14 @@ const Navbar = () => {
       }`}
     >
       <div className="flex items-center justify-between px-6 py-4">
-        <Link href="/" className="font-serif text-xl font-bold tracking-wide">
-          <span className={isLight ? "text-foreground" : "text-primary-foreground"}>
-            Vječno
-          </span>
+        <Link href="/" className="relative h-8 w-32">
+          <Image
+            src={isLight ? "/images/logo-dark.png" : "/images/logo-white.png"}
+            alt="Vječno Logo"
+            fill
+            className="object-contain"
+            priority
+          />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

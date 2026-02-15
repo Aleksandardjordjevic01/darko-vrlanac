@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerNav = [
   { label: "Početna", href: "/" },
@@ -16,7 +17,14 @@ const Footer = () => {
       <div className="container max-w-6xl mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
-            <h3 className="font-serif text-2xl font-bold mb-4">Vječno</h3>
+            <div className="relative h-16 w-48 mb-4">
+              <Image
+                src="/images/logo-white.png"
+                alt="Vječno Logo"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
             <p className="text-sm text-primary-foreground/60 leading-relaxed">
               Ako već morate da birate, izaberite najbolje. Profesionalna organizacija sahrana.
             </p>
@@ -64,7 +72,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 pt-8 text-center">
           <p className="text-xs text-primary-foreground/40">
-            © 2026 Vječno Pogrebne Usluge. Sva prava zadržana.
+            © 2026 Darko Vrlanac Pogrebne Usluge. Sva prava zadržana.
           </p>
         </div>
       </div>
