@@ -1,9 +1,20 @@
+import { Link } from "react-router-dom";
+
+const footerNav = [
+  { label: "Početna", href: "/" },
+  { label: "O nama", href: "/o-nama" },
+  { label: "Usluge", href: "/usluge" },
+  { label: "Vozila", href: "/vozila" },
+  { label: "Katalog", href: "/katalog" },
+  { label: "Galerija", href: "/galerija" },
+  { label: "Kontakt", href: "/kontakt" },
+];
+
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground py-16">
       <div className="container max-w-6xl mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Logo */}
           <div>
             <h3 className="font-serif text-2xl font-bold mb-4">Vječno</h3>
             <p className="text-sm text-primary-foreground/60 leading-relaxed">
@@ -11,17 +22,16 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
             <h4 className="text-xs font-semibold tracking-widest uppercase mb-4 text-primary-foreground/40">
               Navigacija
             </h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
-              {["Početna", "O nama", "Usluge", "Vozila", "Galerija", "Kontakt"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-primary-foreground transition-colors">
-                    {l}
-                  </a>
+              {footerNav.map((l) => (
+                <li key={l.label}>
+                  <Link to={l.href} className="hover:text-primary-foreground transition-colors">
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
